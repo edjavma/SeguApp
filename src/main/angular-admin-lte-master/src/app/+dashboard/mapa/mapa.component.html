@@ -1,0 +1,207 @@
+<div class="row">
+  <div class="col-md-12 col-xs-12">
+    <mk-box
+      header="Arquitectura"
+      [isCollapsable]="true"
+      [isRemovable]="false"
+      contentClasses="table-responsive"
+    >
+      <div class="text-center">
+        <select
+          class="form-control"
+          [(ngModel)]="filtro.idArquitectura"
+          (change)="selected()"
+          name="idArquitectura"
+        >
+          <option
+            *ngFor="let arquitectura of arquitecturas"
+            [ngValue]="arquitectura.idArquitectura"
+            >{{ arquitectura.nombre }}</option
+          >
+        </select>
+      </div>
+    </mk-box>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 col-xs-12">
+    <mk-box
+      header="Mapa de Riesgos"
+      [isCollapsable]="true"
+      [isRemovable]="false"
+      contentClasses="table-responsive"
+    >
+      <div class="text-center">
+        <img src="assets/img/mapa.png" width="50%" height="300px;" />
+      </div>
+    </mk-box>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-7 col-xs-12">
+    <mk-box
+      header="Distribucion"
+      [isCollapsable]="true"
+      [isRemovable]="false"
+      contentClasses="table-responsive"
+    >
+      <table class="table table-bordered table-hover">
+        <tbody>
+          <tr>
+            <th class="text-center" colspan="6">
+              Gravedad General del riesgo
+            </th>
+          </tr>
+          <tr>
+            <td
+              class="text-center"
+              rowspan="6"
+              style="width:3%;background: #c4c4c4;"
+            >
+              <div class="rotar" style="font-weight: bold;">Impacto</div>
+            </td>
+          </tr>
+          <tr *ngFor="let value of estadisticas.data" class="text-center">
+            <td [ngClass]="value.nombre" style="font-weight:bold;">
+              {{ value.nombre }}
+            </td>
+            <td [ngClass]="[value.bajo == 0 ? '' : value.colorA]">
+              {{ value.bajo == 0 ? "" : value.bajo }}
+            </td>
+            <td [ngClass]="[value.medio == 0 ? '' : value.colorB]">
+              {{ value.medio == 0 ? "" : value.medio }}
+            </td>
+            <td [ngClass]="[value.alto == 0 ? '' : value.colorC]">
+              {{ value.alto == 0 ? "" : value.alto }}
+            </td>
+            <td [ngClass]="[value.critico == 0 ? '' : value.colorD]">
+              {{ value.critico == 0 ? "" : value.critico }}
+            </td>
+          </tr>
+          <tr class="text-center">
+            <td style="font-weight:bold;"></td>
+            <td class="Bajo" style="font-weight:bold">Bajo</td>
+            <td class="Medio" style="font-weight:bold">Medio</td>
+            <td class="Alto" style="font-weight:bold">Alto</td>
+            <td class="Critico" style="font-weight:bold">Critico</td>
+          </tr>
+          <tr>
+            <td
+              class="text-center"
+              colspan="6"
+              style="background: #c4c4c4;font-weight: bold;"
+            >
+              Probabilidad
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </mk-box>
+  </div>
+  <div class="col-md-5 col-xs-12">
+    <mk-box
+      header="Totales"
+      [isCollapsable]="true"
+      [isRemovable]="false"
+      contentClasses="table-responsive"
+    >
+      <table class="table table-bordered table-hover">
+        <tbody>
+          <tr>
+            <th class="text-center" colspan="3">
+              Cantidad de Riesgos
+            </th>
+          </tr>
+          <tr *ngFor="let value of estadisticas.evaluacion" class="text-center">
+            <td [ngClass]="value.nivelRiesgo" style="font-weight:bold;">
+              {{ value.nivelRiesgo }}
+            </td>
+            <td>{{ value.total }}</td>
+            <td>{{ value.porcentaje + "%" }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <br />
+      <table class="table table-bordered table-hover">
+        <tbody>
+          <tr>
+            <th class="text-center" colspan="3">
+              Resultado Global de la evaluacion
+            </th>
+          </tr>
+          <tr>
+            <td
+              style="font-weight:bold"
+              class="text-center"
+              [ngClass]="estadisticas.resultado"
+            >
+              {{ estadisticas.resultado }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </mk-box>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 col-xs-12">
+    <mk-box
+      header="Descripcion"
+      [isCollapsable]="true"
+      [isRemovable]="false"
+      contentClasses="table-responsive"
+    >
+      <table class="table" [ngClass]="estadisticas.resultado">
+        <tr>
+          <th class="text-center">
+            Un riesgo alto requiere una atencion rapida
+          </th>
+        </tr>
+        <tr>
+          <td class="text-center">
+            <p>
+              Es una debilidad que significa un problema serio/significativo de
+              control interno o gestion de riesgos que si no es mitigado puede
+              conducir a la perdida de informacion.
+            </p>
+          </td>
+        </tr>
+      </table>
+    </mk-box>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 col-xs-12">
+    <mk-box
+      header="Comparativo"
+      [isCollapsable]="true"
+      [isRemovable]="false"
+      contentClasses="table-responsive"
+    >
+      <div id="containerBar"></div>
+    </mk-box>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6 col-xs-12">
+    <mk-box
+      header="Distribucion del Riesgo"
+      [isCollapsable]="true"
+      [isRemovable]="false"
+      contentClasses="table-responsive"
+    >
+      <div id="containerPie"></div>
+    </mk-box>
+  </div>
+  <div class="col-md-6 col-xs-12">
+    <mk-box
+      header="Diagnostico General"
+      [isCollapsable]="true"
+      [isRemovable]="false"
+      contentClasses="table-responsive"
+    >
+      <div id="containerRadar"></div>
+    </mk-box>
+  </div>
+</div>

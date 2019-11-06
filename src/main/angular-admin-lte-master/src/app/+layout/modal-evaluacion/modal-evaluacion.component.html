@@ -1,0 +1,116 @@
+<div class="modal-body">
+  <mk-box
+    header="Agregar Riesgo"
+    [isCollapsable]="false"
+    [isRemovable]="false"
+    contentClasses="table-responsive"
+  >
+    <form [formGroup]="evaluacionForm" (ngSubmit)="onSubmitForm()">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="riesgo">Riesgo:</label>
+            <p-dropdown
+              [panelStyle]="{ width: '100%' }"
+              [style]="{ width: '100%' }"
+              [styleClass]="['form-control']"
+              [options]="riesgos"
+              optionLabel="nombre"
+              placeholder="Seleccione Opcion"
+              filter="true"
+              formControlName="idRiesgo"
+            ></p-dropdown>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="activo">Activo:</label>
+            <p-dropdown
+              [panelStyle]="{ width: '100%' }"
+              [style]="{ width: '100%' }"
+              [styleClass]="['form-control']"
+              [options]="activos"
+              optionLabel="nombre"
+              placeholder="Seleccione Opcion"
+              formControlName="idActivo"
+            ></p-dropdown>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="clasificacion">Clasificacion:</label>
+            <p-dropdown
+              [panelStyle]="{ width: '100%' }"
+              [style]="{ width: '100%' }"
+              [styleClass]="['form-control']"
+              [options]="clasificaciones"
+              optionLabel="nombre"
+              placeholder="Seleccione Opcion"
+              formControlName="idClasificacion"
+            ></p-dropdown>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="tipoTratamiento">Tipo Tratamiento:</label>
+            <p-dropdown
+              [panelStyle]="{ width: '100%' }"
+              [style]="{ width: '100%' }"
+              [styleClass]="['form-control']"
+              [options]="tiposTratamientos"
+              optionLabel="nombre"
+              placeholder="Seleccione Opcion"
+              formControlName="idTipoTratamiento"
+            ></p-dropdown>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="arquitectura">Aplica:</label>
+            <p-toggleButton
+              [style]="{ width: '100%' }"
+              [styleClass]="['form-control']"
+              onLabel="Si"
+              offLabel="No"
+              formControlName="aplica"
+            ></p-toggleButton>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="probabilidad">Probabilidad:</label>
+            <select class="form-control" formControlName="probabilidad">
+              <option *ngFor="let value of values" [ngValue]="value">{{
+                value
+              }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="impacto">Impacto:</label>
+            <select class="form-control" formControlName="impacto">
+              <option *ngFor="let value of values" [ngValue]="value">{{
+                value
+              }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <br />
+      <button
+        type="submit"
+        [disabled]="evaluacionForm.invalid"
+        class="btn btn-primary"
+      >
+        Crear
+      </button>
+    </form>
+  </mk-box>
+</div>

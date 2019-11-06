@@ -1,0 +1,30 @@
+<div class="modal-body">
+  <mk-box
+    header="Soluciones"
+    [isCollapsable]="false"
+    [isRemovable]="false"
+    contentClasses="table-responsive"
+  >
+    <div class="row">
+      <div class="col-md-12">
+        <p-pickList
+          [source]="values.source"
+          [target]="values.target"
+          filterBy="nombre"
+          [style]="{ width: '100%' }"
+          [sourceStyle]="{ width: '100%' }"
+          [targetStyle]="{ width: '100%' }"
+        >
+          <ng-template let-value pTemplate="item">
+            <span>{{ value.nombre }}</span>
+          </ng-template>
+        </p-pickList>
+      </div>
+    </div>
+  </mk-box>
+</div>
+<div class="modal-footer">
+  <div class="text-right">
+    <button class="btn btn-success" (click)="saveSoluciones()">Guardar</button>
+  </div>
+</div>

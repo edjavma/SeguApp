@@ -1,0 +1,205 @@
+<div class="row">
+  <div class="col-md-12">
+    <mk-box
+      header="Seleccionar Resultado"
+      [isCollapsable]="true"
+      [isRemovable]="false"
+      contentClasses="table-responsive"
+    >
+      <p-selectButton
+        [options]="types"
+        [(ngModel)]="selectedType"
+        (onChange)="selected()"
+      ></p-selectButton>
+    </mk-box>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 col-xs-12">
+    <mk-box
+      header="Resultados por {{ types[selectedType - 1].label }}"
+      [isCollapsable]="true"
+      [isRemovable]="false"
+      contentClasses="table-responsive"
+    >
+      <table class="table table-bordered table-hover">
+        <tbody>
+          <tr>
+            <th class="text-center" colspan="8">
+              Resultado por {{ types[selectedType - 1].label }}
+            </th>
+          </tr>
+          <tr>
+            <th colspan="3" class="text-center">
+              {{
+                selectedType == 1
+                  ? "Riesgos"
+                  : selectedType == 2
+                  ? "Impactos"
+                  : selectedType == 3
+                  ? "Brecha"
+                  : "Tratamiento"
+              }}
+            </th>
+            <th
+              rowspan="2"
+              class="text-center"
+              style="vertical-align : middle;"
+            >
+              Evaluacion
+            </th>
+            <th colspan="4" class="text-center">
+              Evaluacion
+              {{
+                selectedType == 1
+                  ? "del Riesgo"
+                  : selectedType == 2
+                  ? "del Impacto"
+                  : selectedType == 3
+                  ? "de la Brecha"
+                  : "del Tratamiento"
+              }}
+            </th>
+          </tr>
+          <tr>
+            <th class="text-center">Tipo</th>
+            <th class="text-center">Total</th>
+            <th class="text-center">%</th>
+            <th class="text-center">Critico</th>
+            <th class="text-center">Alto</th>
+            <th class="text-center">Moderado</th>
+            <th class="text-center">Bajo</th>
+          </tr>
+          <tr *ngFor="let estadistica of estadisticas.data" class="text-center">
+            <td>{{ estadistica.tipo }}</td>
+            <td>{{ estadistica.total }}</td>
+            <td>{{ estadistica.porcentaje + "%" }}</td>
+            <td [ngClass]="[estadistica.nivelRiesgo]" style="font-weight:bold;">
+              {{ estadistica.nivelRiesgo }}
+            </td>
+            <td>{{ estadistica.totalCritico }}</td>
+            <td>{{ estadistica.totalAlto }}</td>
+            <td>{{ estadistica.totalMedio }}</td>
+            <td>{{ estadistica.totalBajo }}</td>
+          </tr>
+          <tr>
+            <td class="text-center" style="font-weight:bold">Totales</td>
+            <td class="text-center" style="font-weight:bold">
+              {{ estadisticas.total }}
+            </td>
+            <td class="text-center" style="font-weight:bold">
+              {{ estadisticas.porcentajeTotal }}
+            </td>
+            <td></td>
+            <td class="text-center" style="font-weight:bold">
+              {{ estadisticas.totalCritico }}
+            </td>
+            <td class="text-center" style="font-weight:bold">
+              {{ estadisticas.totalAlto }}
+            </td>
+            <td class="text-center" style="font-weight:bold">
+              {{ estadisticas.totalMedio }}
+            </td>
+            <td class="text-center" style="font-weight:bold">
+              {{ estadisticas.totalBajo }}
+            </td>
+          </tr>
+          <tr>
+            <td class="text-center" style="font-weight:bold">Porcentaje</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="text-center" style="font-weight:bold">
+              {{ estadisticas.totalPorcentajeCritico + "%" }}
+            </td>
+            <td class="text-center" style="font-weight:bold">
+              {{ estadisticas.totalPorcentajeAlto + "%" }}
+            </td>
+            <td class="text-center" style="font-weight:bold">
+              {{ estadisticas.totalPorcentajeMedio + "%" }}
+            </td>
+            <td class="text-center" style="font-weight:bold">
+              {{ estadisticas.totalPorcentajeBajo + "%" }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </mk-box>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6 col-xs-12">
+    <mk-box
+      header="Distribucion"
+      [isCollapsable]="true"
+      [isRemovable]="false"
+      contentClasses="table-responsive"
+    >
+      <div id="containerPie"></div>
+      <!--p-chart
+        type="pie"
+        [data]="estadisticas.pieChart"
+        [options]="estadisticas.pieChart.options"
+        [plugins]="estadisticas.pieChart.plugins"
+      ></p-chart-->
+    </mk-box>
+  </div>
+  <div class="col-md-6 col-xs-12">
+    <mk-box
+      header="Totales"
+      [isCollapsable]="true"
+      [isRemovable]="false"
+      contentClasses="table-responsive"
+    >
+      <table class="table table-bordered table-hover">
+        <tbody>
+          <tr>
+            <th class="text-center" colspan="3">
+              Cantidad de Riesgos
+            </th>
+          </tr>
+          <tr *ngFor="let value of estadisticas.evaluacion" class="text-center">
+            <td [ngClass]="value.nivelRiesgo" style="font-weight:bold;">
+              {{ value.nivelRiesgo }}
+            </td>
+            <td>{{ value.total }}</td>
+            <td>{{ value.porcentaje + "%" }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <br />
+      <table class="table table-bordered table-hover">
+        <tbody>
+          <tr>
+            <th class="text-center" colspan="3">
+              Resultados por {{ types[selectedType - 1].label }}
+            </th>
+          </tr>
+          <tr>
+            <td
+              style="font-weight:bold"
+              class="text-center"
+              [ngClass]="estadisticas.resultado"
+            >
+              {{ estadisticas.resultado }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </mk-box>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12 col-xs-12">
+    <mk-box
+      header="Distribucion por {{ types[selectedType - 1].label }}"
+      [isCollapsable]="true"
+      [isRemovable]="false"
+      contentClasses="table-responsive"
+    >
+      <div id="containerLine"></div>
+    </mk-box>
+  </div>
+</div>

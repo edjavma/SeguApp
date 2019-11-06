@@ -1,0 +1,94 @@
+<mk-box header="Arquitecturas" [isCollapsable]="false" [isRemovable]="false">
+  <p-selectButton
+    [options]="arquitecturas"
+    [(ngModel)]="selectedArq"
+    (onChange)="selected()"
+  ></p-selectButton>
+</mk-box>
+<mk-box
+  header="Tratamiento de Riesgos"
+  [isCollapsable]="false"
+  [isRemovable]="false"
+>
+  <p-table
+    #dt
+    [value]="tratamientos"
+    [paginator]="true"
+    [rows]="10"
+    [globalFilterFields]="[
+      'idRiesgo.idRiesgo',
+      'idRiesgo.nombre',
+      'idRiesgo.descripcion',
+      'idRiesgo.causa'
+    ]"
+    [(selection)]="selectedRow"
+  >
+    <ng-template pTemplate="caption">
+      <div style="text-align: right">
+        <button
+          class="btn btn-success"
+          *ngIf="selectedRow != undefined"
+          (click)="crearTratamientoRiesgo()"
+        >
+          Tratar Riesgo <i class="fa fa-plus"></i>
+        </button>
+      </div>
+      <br />
+      <div style="text-align: right">
+        <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+        <input
+          type="text"
+          pInputText
+          size="50"
+          placeholder="Buscar"
+          (input)="dt.filterGlobal($event.target.value, 'contains')"
+          style="width:auto"
+        />
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th style="width: 3%"></th>
+        <th style="width: 3%">ID</th>
+        <th>Clasificacion del Riesgo</th>
+        <th style="width: 5%">Nivel de riesgo</th>
+        <th>Tratamiento del Riesgo</th>
+        <th>Riesgo</th>
+        <th>Clasificacion</th>
+        <th>Tipo de Riesgo</th>
+        <th>Tipo de impacto</th>
+        <th style="width: 9%">Responsable</th>
+        <th>Generador del riesgo</th>
+        <th>Accion Correctiva</th>
+        <th>Fecha limite para aplicar accion correctiva</th>
+        <th>Observacion Seguimiento</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <tr [pSelectableRow]="rowData">
+        <td>
+          <p-tableRadioButton [value]="rowData"></p-tableRadioButton>
+        </td>
+        <td>{{ rowData.idRiesgo.id }}</td>
+        <td>{{ rowData.idRiesgo.identificador }}</td>
+        <td
+          class="text-center"
+          style="font-weight:bold"
+          [ngClass]="rowData.nivel"
+        >
+          {{ rowData.nivel }}
+        </td>
+        <td>{{ rowData.idTipoTratamiento.nombre }}</td>
+        <td>{{ rowData.idRiesgo.nombre }}</td>
+        <td>{{ rowData.idClasificacion.nombre }}</td>
+        <td>{{ rowData.idRiesgo.idTipoRiesgo.nombre }}</td>
+        <td>{{ rowData.idRiesgo.idTipoImpacto.nombre }}</td>
+        <td>{{ rowData.idRiesgo.idResponsable.nombre }}</td>
+        <td>{{ rowData.idRiesgo.idGeneradorRiesgo.nombre }}</td>
+        <td>{{ rowData.idRiesgo.accionCorrectiva }}</td>
+        <td></td>
+        <td></td>
+      </tr>
+    </ng-template>
+  </p-table>
+</mk-box>

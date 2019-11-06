@@ -1,0 +1,60 @@
+<div class="row">
+  <div class="col-md-6 col-xs-12">
+    <mk-box
+      header="Tipos de Impacto"
+      [isCollapsable]="true"
+      [isRemovable]="false"
+      contentClasses="table-responsive"
+    >
+      <table class="table table-bordered table-hover">
+        <tbody>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+          </tr>
+          <tr *ngFor="let value of impactos">
+            <td>{{ value.idTipoImpacto }}</td>
+            <td>{{ value.nombre }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </mk-box>
+  </div>
+  <div class="col-md-6 col-xs-12">
+    <mk-box
+      header="Agregar Tipo de Impacto"
+      [isCollapsable]="true"
+      [isRemovable]="false"
+      contentClasses="table-responsive"
+    >
+      <form [formGroup]="tipoImpacto" (ngSubmit)="onSubmitForm()">
+        <mk-input-group inputErrorColor="warning">
+          <mk-input-group-label>Nombre del Impacto</mk-input-group-label>
+          <mk-input-group-addon-left
+            ><i class="fa fa-user"></i
+          ></mk-input-group-addon-left>
+          <mk-input-group-addon-right
+            ><i
+              [ngClass]="tipoImpacto.invalid ? 'fa fa-times' : 'fa fa-check'"
+            ></i
+          ></mk-input-group-addon-right>
+          <mk-input-group-content>
+            <input
+              mkInputText
+              formControlName="nombre"
+              class="toto form-control"
+            />
+          </mk-input-group-content>
+        </mk-input-group>
+        <br />
+        <button
+          type="submit"
+          [disabled]="tipoImpacto.invalid"
+          class="btn btn-primary"
+        >
+          Crear
+        </button>
+      </form>
+    </mk-box>
+  </div>
+</div>

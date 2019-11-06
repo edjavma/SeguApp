@@ -1,0 +1,50 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~primeng/resources/themes/nova-light/theme.css";
+@import "~primeng/resources/primeng.min.css";
+@import "~primeicons/primeicons.css";
+@import "~ng-bootstrap-to-bootstrap-3/dist/ng-bootstrap-to-bootstrap-3.min.css";
+
+.table-bordered > thead > tr > th,
+.table-bordered > tbody > tr > th,
+.table-bordered > tfoot > tr > th,
+.table-bordered > thead > tr > td,
+.table-bordered > tbody > tr > td,
+.table-bordered > tfoot > tr > td {
+  border-color: #a9a8a8;
+}
+
+.table-bordered > thead > tr > th,
+.table-bordered > tbody > tr > th {
+  background: #c4c4c4;
+}
+
+.ui-table table {
+  font-family: "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 10px;
+}
+
+.ui-state-highlight {
+  background-color: #d4d6d9 !important;
+  color: black !important;
+  font-weight: bold;
+}
+
+body .ui-table .ui-table-tbody > tr > td {
+  border: 1px solid #958a8a !important;
+}
+
+.Bajo {
+  background: green !important;
+}
+
+.Medio {
+  background: yellow !important;
+}
+
+.Alto {
+  background: orange !important;
+}
+
+.Critico {
+  background: red !important;
+}

@@ -1,0 +1,126 @@
+<mk-box header="Arquitecturas" [isCollapsable]="false" [isRemovable]="false">
+  <p-selectButton
+    [options]="arquitecturas"
+    [(ngModel)]="selectedArq"
+    (onChange)="selected()"
+  ></p-selectButton>
+</mk-box>
+<mk-box
+  header="Evaluacion de Riesgos"
+  [isCollapsable]="false"
+  [isRemovable]="false"
+>
+  <p-table
+    #dt
+    [value]="evaluaciones"
+    [paginator]="true"
+    [rows]="10"
+    [globalFilterFields]="[
+      'idRiesgo.idRiesgo',
+      'idRiesgo.nombre',
+      'idRiesgo.descripcion',
+      'idRiesgo.causa'
+    ]"
+    [(selection)]="selectedRow"
+  >
+    <ng-template pTemplate="caption">
+      <div style="text-align: right">
+        <button
+          class="btn btn-info"
+          (click)="crearEvaluacionRiesgo('M')"
+          *ngIf="selectedRow != undefined"
+        >
+          Modificar Evaluacion <i class="fa fa-edit"></i>
+        </button>
+        <button
+          class="btn btn-danger"
+          (click)="eliminarEvaluacion()"
+          *ngIf="selectedRow != undefined"
+        >
+          Eliminar Evaluacion <i class="fa fa-trash"></i>
+        </button>
+        <button class="btn btn-success" (click)="crearEvaluacionRiesgo('A')">
+          Evaluar Riesgo <i class="fa fa-plus"></i>
+        </button>
+      </div>
+      <br />
+      <div style="text-align: right">
+        <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+        <input
+          type="text"
+          pInputText
+          size="50"
+          placeholder="Buscar"
+          (input)="dt.filterGlobal($event.target.value, 'contains')"
+          style="width:auto"
+        />
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th style="width: 3%"></th>
+        <th style="width: 3%">ID</th>
+        <th style="width: 5%">Aplica</th>
+        <th>Descripcion del Riesgo</th>
+        <th>Activo Afectado</th>
+        <th style="width: 9%">Propietario</th>
+        <th>Clasificacion del Riesgo</th>
+        <th>Clasificacion</th>
+        <th>Tipo de Riesgo</th>
+        <th>Tipo de impacto</th>
+        <th>Brecha</th>
+        <th style="width: 5%">Proba - bilidad</th>
+        <th style="width: 5%">Impac - to</th>
+        <th style="width: 5%">Resul - tado</th>
+        <th style="width: 5%">Nivel de riesgo</th>
+        <th>Tratamiento del Riesgo</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <tr [pSelectableRow]="rowData">
+        <td>
+          <p-tableRadioButton [value]="rowData"></p-tableRadioButton>
+        </td>
+        <td>{{ rowData.idRiesgo.id }}</td>
+        <td>{{ "Si" }}</td>
+        <td>{{ rowData.idRiesgo.descripcion }}</td>
+        <td>{{ rowData.idActivo.nombre }}</td>
+        <td>{{ rowData.idRiesgo.idResponsable.nombre }}</td>
+        <td>{{ rowData.idRiesgo.identificador }}</td>
+        <td>{{ rowData.idClasificacion.nombre }}</td>
+        <td>{{ rowData.idRiesgo.idTipoRiesgo.nombre }}</td>
+        <td>{{ rowData.idRiesgo.idTipoImpacto.nombre }}</td>
+        <td>{{ rowData.idRiesgo.idTipoBrecha.nombre }}</td>
+        <td
+          class="text-center"
+          style="font-weight:bold"
+          [ngClass]="rowData.nivelProbabilidad"
+        >
+          {{ rowData.probabilidad }}
+        </td>
+        <td
+          class="text-center"
+          style="font-weight:bold"
+          [ngClass]="rowData.nivelImpacto"
+        >
+          {{ rowData.impacto }}
+        </td>
+        <td
+          class="text-center"
+          style="font-weight:bold"
+          [ngClass]="rowData.nivel"
+        >
+          {{ rowData.calificacion }}
+        </td>
+        <td
+          class="text-center"
+          style="font-weight:bold"
+          [ngClass]="rowData.nivel"
+        >
+          {{ rowData.nivel }}
+        </td>
+        <td>{{ rowData.idTipoTratamiento.nombre }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</mk-box>

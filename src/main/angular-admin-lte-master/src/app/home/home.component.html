@@ -1,0 +1,120 @@
+<div class="row">
+  <div class="col-md-6 col-xs-12">
+    <mk-box
+      header="Clasificacion de prioridades"
+      [isCollapsable]="true"
+      [isRemovable]="false"
+      contentClasses="table-responsive"
+    >
+      <table class="table table-bordered table-hover">
+        <tbody>
+          <tr>
+            <td class="Bajo" style="font-weight:bold">Bajo</td>
+            <td class="Bajo">
+              Son procesos que se pueden ver afectados pero no de una manera
+              severa por lo cual se deben monitorear
+            </td>
+          </tr>
+          <tr>
+            <td class="Medio" style="font-weight:bold">Medio</td>
+            <td class="Medio">
+              Son procesos que pueden afectar la continuidad de operaciones o
+              tener un impacto no muy severo en la seguridad de la información
+              por lo cual se debe realizar una supervisión directa.
+            </td>
+          </tr>
+          <tr>
+            <td class="Alto" style="font-weight:bold">Alto</td>
+            <td class="Alto">
+              Son los procesos que pueden tener un impacto importante en la
+              seguridad de la información o continuidad de operaciones por lo
+              cual se debe tomar medidas al respecto.
+            </td>
+          </tr>
+          <tr>
+            <td class="Critico" style="font-weight:bold">Critico</td>
+            <td class="Critico">
+              Son procesos que pueden tener un impacto muy importante en la
+              seguridad de la informacion asi como en la continuidad de las
+              operaciones, por lo cual deben ser atendidos de manera inmediata.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </mk-box>
+  </div>
+  <div class="col-md-6 col-xs-12">
+    <mk-box
+      [isCollapsable]="true"
+      [isRemovable]="false"
+      contentClasses="table-responsive"
+    >
+      <table class="table table-bordered table-hover">
+        <tbody>
+          <tr>
+            <th style="width:50%;">Valoracion del Riesgo</th>
+            <th class="text-center">Calificacion</th>
+          </tr>
+          <tr *ngFor="let clasificacion of clasificaciones">
+            <td style="font-weight: bold;" [ngClass]="[clasificacion.nombre]">
+              {{ clasificacion.nombre }}
+            </td>
+            <td class="text-center" [ngClass]="[clasificacion.nombre]">
+              {{ clasificacion.initValue + " - " + clasificacion.finalValue }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </mk-box>
+  </div>
+</div>
+<mk-box
+  [isCollapsable]="true"
+  [isRemovable]="false"
+  contentClasses="table-responsive"
+>
+  <table class="table table-bordered table-hover">
+    <tbody>
+      <tr>
+        <th rowspan="2" class="text-center" style="vertical-align:sub;">
+          Probabilidad
+        </th>
+        <th colspan="4" class="text-center">Impacto</th>
+      </tr>
+      <tr>
+        <th class="text-center">Bajo</th>
+        <th class="text-center">Moderado</th>
+        <th class="text-center">Alto</th>
+        <th class="text-center">Critico</th>
+      </tr>
+      <tr>
+        <td>Muy Improbable</td>
+        <td class="Bajo text-center" style="font-weight:bold">1</td>
+        <td class="Bajo text-center" style="font-weight:bold">2</td>
+        <td class="Bajo text-center" style="font-weight:bold">3</td>
+        <td class="Bajo text-center" style="font-weight:bold">4</td>
+      </tr>
+      <tr>
+        <td>Improbable</td>
+        <td class="Bajo text-center" style="font-weight:bold">2</td>
+        <td class="Bajo text-center" style="font-weight:bold">4</td>
+        <td class="Medio text-center" style="font-weight:bold">6</td>
+        <td class="Medio text-center" style="font-weight:bold">8</td>
+      </tr>
+      <tr>
+        <td>Moderado</td>
+        <td class="Bajo text-center" style="font-weight:bold">3</td>
+        <td class="Medio text-center" style="font-weight:bold">6</td>
+        <td class="Alto text-center" style="font-weight:bold">9</td>
+        <td class="Alto text-center" style="font-weight:bold">12</td>
+      </tr>
+      <tr>
+        <td>Muy Probable</td>
+        <td class="Bajo text-center" style="font-weight:bold">4</td>
+        <td class="Medio text-center" style="font-weight:bold">8</td>
+        <td class="Alto text-center" style="font-weight:bold">12</td>
+        <td class="Critico text-center" style="font-weight:bold">16</td>
+      </tr>
+    </tbody>
+  </table>
+</mk-box>

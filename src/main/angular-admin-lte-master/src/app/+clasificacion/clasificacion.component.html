@@ -1,0 +1,64 @@
+<div class="row">
+  <div class="col-md-6 col-xs-12">
+    <mk-box
+      header="Clasificaciones"
+      [isCollapsable]="true"
+      [isRemovable]="false"
+      contentClasses="table-responsive"
+    >
+      <table class="table table-bordered table-hover">
+        <tbody>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+          </tr>
+          <tr *ngFor="let value of clasificaciones">
+            <td>{{ value.idClasificacion }}</td>
+            <td>{{ value.nombre }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </mk-box>
+  </div>
+  <div class="col-md-6 col-xs-12">
+    <mk-box
+      header="Agregar Clasificacion"
+      [isCollapsable]="true"
+      [isRemovable]="false"
+      contentClasses="table-responsive"
+    >
+      <form [formGroup]="clasificacionForm" (ngSubmit)="onSubmitForm()">
+        <mk-input-group inputErrorColor="warning">
+          <mk-input-group-label
+            >Nombre de la clasificacion</mk-input-group-label
+          >
+          <mk-input-group-addon-left
+            ><i class="fa fa-user"></i
+          ></mk-input-group-addon-left>
+          <mk-input-group-addon-right
+            ><i
+              [ngClass]="
+                clasificacionForm.invalid ? 'fa fa-times' : 'fa fa-check'
+              "
+            ></i
+          ></mk-input-group-addon-right>
+          <mk-input-group-content>
+            <input
+              mkInputText
+              formControlName="nombre"
+              class="toto form-control"
+            />
+          </mk-input-group-content>
+        </mk-input-group>
+        <br />
+        <button
+          type="submit"
+          [disabled]="clasificacionForm.invalid"
+          class="btn btn-primary"
+        >
+          Crear
+        </button>
+      </form>
+    </mk-box>
+  </div>
+</div>

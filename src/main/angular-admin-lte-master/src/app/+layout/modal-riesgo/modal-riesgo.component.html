@@ -1,0 +1,188 @@
+<div class="modal-body">
+  <mk-box
+    header="Agregar Riesgo"
+    [isCollapsable]="false"
+    [isRemovable]="false"
+    contentClasses="table-responsive"
+  >
+    <form [formGroup]="riesgoForm" (ngSubmit)="onSubmitForm()">
+      <mk-input-group inputErrorColor="warning">
+        <mk-input-group-label>Nombre del Riesgo</mk-input-group-label>
+        <mk-input-group-addon-left
+          ><i class="fa fa-user"></i
+        ></mk-input-group-addon-left>
+        <mk-input-group-addon-right
+          ><i [ngClass]="riesgoForm.invalid ? 'fa fa-times' : 'fa fa-check'"></i
+        ></mk-input-group-addon-right>
+        <mk-input-group-content>
+          <input
+            mkInputText
+            formControlName="nombre"
+            class="toto form-control"
+          />
+        </mk-input-group-content>
+      </mk-input-group>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="tipoRiesgo">Tipo de Riesgo:</label>
+            <p-dropdown
+              [panelStyle]="{ width: '100%' }"
+              [style]="{ width: '100%' }"
+              [styleClass]="['form-control']"
+              [options]="tiposRiesgo"
+              optionLabel="nombre"
+              placeholder="Seleccione Opcion"
+              formControlName="idTipoRiesgo"
+            ></p-dropdown>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="tipoImpacto">Tipo de impacto:</label>
+            <p-dropdown
+              [panelStyle]="{ width: '100%' }"
+              [style]="{ width: '100%' }"
+              [styleClass]="['form-control']"
+              [options]="tiposImpacto"
+              optionLabel="nombre"
+              placeholder="Seleccione Opcion"
+              formControlName="idTipoImpacto"
+            ></p-dropdown>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="tipoBrecha">Tipo de Brecha:</label>
+            <p-dropdown
+              [panelStyle]="{ width: '100%' }"
+              [style]="{ width: '100%' }"
+              [styleClass]="['form-control']"
+              [options]="tiposBrecha"
+              optionLabel="nombre"
+              placeholder="Seleccione Opcion"
+              formControlName="idTipoBrecha"
+            ></p-dropdown>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="arquitectura">Capa de Riesgo:</label>
+            <p-dropdown
+              [panelStyle]="{ width: '100%' }"
+              [style]="{ width: '100%' }"
+              [styleClass]="['form-control']"
+              [options]="capas"
+              optionLabel="nombre"
+              placeholder="Seleccione Opcion"
+              formControlName="idRiesgoCapa"
+            ></p-dropdown>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="responsable">Responsable:</label>
+            <p-dropdown
+              [panelStyle]="{ width: '100%' }"
+              [style]="{ width: '100%' }"
+              [styleClass]="['form-control']"
+              [options]="responsables"
+              optionLabel="nombre"
+              placeholder="Seleccione Opcion"
+              formControlName="idResponsable"
+            ></p-dropdown>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="generadorRiesgo">Generador del Riesgo:</label>
+            <p-dropdown
+              [panelStyle]="{ width: '100%' }"
+              [style]="{ width: '100%' }"
+              [styleClass]="['form-control']"
+              [options]="generadoresRiesgo"
+              optionLabel="nombre"
+              placeholder="Seleccione Opcion"
+              formControlName="idGeneradorRiesgo"
+            ></p-dropdown>
+          </div>
+        </div>
+      </div>
+      <mk-input-group inputErrorColor="warning">
+        <mk-input-group-label>Descripcion del Riesgo</mk-input-group-label>
+        <mk-input-group-addon-left
+          ><i class="fa fa-user"></i
+        ></mk-input-group-addon-left>
+        <mk-input-group-addon-right
+          ><i [ngClass]="riesgoForm.invalid ? 'fa fa-times' : 'fa fa-check'"></i
+        ></mk-input-group-addon-right>
+        <mk-input-group-content>
+          <textarea
+            mkInputText
+            formControlName="descripcion"
+            class="toto form-control"
+          >
+          </textarea>
+        </mk-input-group-content>
+      </mk-input-group>
+      <mk-input-group inputErrorColor="warning">
+        <mk-input-group-label>Causa del riesgo</mk-input-group-label>
+        <mk-input-group-addon-left
+          ><i class="fa fa-user"></i
+        ></mk-input-group-addon-left>
+        <mk-input-group-addon-right
+          ><i [ngClass]="riesgoForm.invalid ? 'fa fa-times' : 'fa fa-check'"></i
+        ></mk-input-group-addon-right>
+        <mk-input-group-content>
+          <textarea
+            mkInputText
+            formControlName="causa"
+            class="toto form-control"
+          ></textarea>
+        </mk-input-group-content>
+      </mk-input-group>
+      <mk-input-group inputErrorColor="warning">
+        <mk-input-group-label>Consecuencias del Riesgo</mk-input-group-label>
+        <mk-input-group-addon-left
+          ><i class="fa fa-user"></i
+        ></mk-input-group-addon-left>
+        <mk-input-group-addon-right
+          ><i [ngClass]="riesgoForm.invalid ? 'fa fa-times' : 'fa fa-check'"></i
+        ></mk-input-group-addon-right>
+        <mk-input-group-content>
+          <textarea
+            mkInputText
+            formControlName="consecuencias"
+            class="toto form-control"
+          ></textarea>
+        </mk-input-group-content>
+      </mk-input-group>
+      <mk-input-group inputErrorColor="warning">
+        <mk-input-group-label>Accion correctiva</mk-input-group-label>
+        <mk-input-group-addon-left
+          ><i class="fa fa-user"></i
+        ></mk-input-group-addon-left>
+        <mk-input-group-addon-right
+          ><i [ngClass]="riesgoForm.invalid ? 'fa fa-times' : 'fa fa-check'"></i
+        ></mk-input-group-addon-right>
+        <mk-input-group-content>
+          <textarea
+            mkInputText
+            formControlName="accionCorrectiva"
+            class="toto form-control"
+          ></textarea>
+        </mk-input-group-content>
+      </mk-input-group>
+      <br />
+      <button
+        type="submit"
+        [disabled]="riesgoForm.invalid"
+        class="btn btn-primary"
+      >
+        Crear
+      </button>
+    </form>
+  </mk-box>
+</div>
